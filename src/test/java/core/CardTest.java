@@ -25,4 +25,15 @@ public class CardTest extends TestCase
 		assertEquals(11,card2.getValue());
 		assertEquals(10,card3.getValue());
 	}
+	
+	public void testToString()
+	{
+		Card card1 = new Card("C","2");
+		Card card2 = new Card("D","A");
+		Card card3 = new Card("S","J");
+		
+		assertEquals("C2",card1.toString());
+		assertEquals("DA",card2.toString());
+		assertEquals("SJ",card3.toString());
+	}
 }
