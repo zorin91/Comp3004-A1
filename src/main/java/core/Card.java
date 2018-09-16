@@ -29,4 +29,9 @@ public class Card {
 			return Integer.parseInt(this.rank);
 		}
 	}
+	
+	public String toString()
+	{
+		return this.suit + this.rank;
+	}
 }
