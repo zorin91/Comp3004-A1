@@ -37,15 +37,27 @@ public class BlackJack {
 	dealer.drawCard(deck.pop());
 	
 	view.displayPlayerHand(player1);
-	view.displayDealerHand(dealer);
+	view.displayDealerHand(dealer,false);
 	
-	if(checkFor21())
+	//checks if either player or dealer hands are 21 in which case the game ends at this point
+	if(checkFor21() && !checkFor21(dealer))
 	{
 		view.gameWin();
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
 		return true;
 	}
+	else if(checkFor21(dealer))
+	{
+		view.gameOver();
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
+		return false;
+	}
 	
-	
+	//game continues here, player is given a choice to stand or hit
+	else
+	{
 	view.askForPlayerChoice();
 	playerChoice = getPlayerChoice();
 	while (!playerChoice.equals("S"))
@@ -53,34 +65,68 @@ public class BlackJack {
 		
 	if(playerChoice.equals("H"))
 	{
+		view.playerHit();
 		player1.drawCard(deck.pop());
 		if(checkForBust(player1))
 		{
-			view.GameOver();
+			view.gameOver();
+			view.displayPlayerHand(player1);
+			view.displayDealerHand(dealer,true);
 			return false;
 		}
 		view.displayPlayerHand(player1);
-		view.displayDealerHand(dealer);
+		view.displayDealerHand(dealer,false);
 		
+		view.askForPlayerChoice();
 		playerChoice = getPlayerChoice();
 	}
 	else if(playerChoice.equals("D"))
 	{
 		//Todo: split method
 	}
+	else if(playerChoice.equals("S"))
+	{
+		break;
+	}
 	else
 	{
 		view.wrongInputMessage();
 		break;
 	}
-	
 	}
+	view.playerStand();
 	
-	
-	
-	
+	//player controlled part of the game has ended
+	while(dealer.dealerDecision())
+	{
+		view.dealerHit();
+		dealer.drawCard(deck.pop());
 		
-		
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
+		if(checkForBust(dealer))
+		{
+			view.gameWin();
+			return true;
+		}
+	}
+	view.dealerStand();
+	//end of dealer controlled part of the game
+	
+	view.displayPlayerHand(player1);
+	view.displayDealerHand(dealer,true);
+	//final comparison of hands to determine winner
+	if(compareHands())
+	{
+		view.gameWin();
+		return true;
+	}
+	else
+	{
+		view.gameOver();
+		return false;
+	}
+	}	
 	}
 	
 	public String getFileContents()
@@ -167,7 +213,6 @@ public class BlackJack {
 		String choice;
 		Scanner keyboard = new Scanner(System.in);
 		choice = keyboard.next();
-		keyboard.close();
 		if(choice.equals("h") || choice.equals("H"))
 		{
 			return "H";
@@ -188,9 +233,7 @@ public class BlackJack {
 	
 	public static void main(String[] args) {
 		BlackJack bj = new BlackJack();
-		bj.getFileInput("testInput.txt");
-		
-		System.out.println(bj.getPlayerChoice());
+		boolean result = bj.playMatch();
 	}
 	
 }

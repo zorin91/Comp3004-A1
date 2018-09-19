@@ -16,6 +16,11 @@ public class Dealer {
 		this.hasSmallAce = false;
 	}
 	
+	public ArrayList<Card> getHand()
+	{
+		return hand;
+	}
+	
 	public String drawCard(Card card)
 	{
 		if(card.getValue() == 11)
