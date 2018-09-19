@@ -28,6 +28,25 @@ public class BlackJackTest extends TestCase{
 		assertEquals(false,bj3.checkFor21());
 	}
 	
+	public void testCheckForBust()
+	{
+		BlackJack bj1 = new BlackJack();
+		BlackJack bj2 = new BlackJack();
+		
+		Card card1 = new Card("C","8");
+		Card card2 = new Card("H","9");
+		Card card3 = new Card("C","J");
+		
+		bj1.player1.drawCard(card1);
+		bj1.player1.drawCard(card2);
+		assertEquals(false,bj1.checkForBust());
+		bj2.player1.drawCard(card1);
+		bj2.player1.drawCard(card2);
+		bj2.player1.drawCard(card3);
+		assertEquals(true,bj2.checkForBust());
+		
+	}
+	
 	
 	public void testCompareHands()
 	{
