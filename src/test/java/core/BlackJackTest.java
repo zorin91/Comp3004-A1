@@ -29,15 +29,15 @@ public class BlackJackTest extends TestCase{
 		
 		bj.dealer.drawCard(card1);
 		bj.dealer.drawCard(card2);
-		assertEquals(true,bj.checkFor21(dealer));
+		assertEquals(true,bj.checkFor21(bj.dealer));
 		bj2.dealer.drawCard(card1);
 		bj2.dealer.drawCard(card3);
 		bj2.dealer.drawCard(card2);
 		bj2.dealer.drawCard(card4);
-		assertEquals(true,bj2.checkFor21(dealer));
+		assertEquals(true,bj2.checkFor21(bj2.dealer));
 		bj3.dealer.drawCard(card2);
 		bj3.dealer.drawCard(card4);
-		assertEquals(false,bj3.checkFor21(dealer));
+		assertEquals(false,bj3.checkFor21(bj3.dealer));
 	}
 	
 

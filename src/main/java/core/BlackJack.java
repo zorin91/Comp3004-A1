@@ -100,6 +100,18 @@ public class BlackJack {
 		}
 	}
 	
+	public boolean checkFor21(Dealer d)
+	{
+		if(dealer.getHandValue() == 21)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public boolean checkForBust(Player p)
 	{
 		if(p.getHandValue() > 21)
