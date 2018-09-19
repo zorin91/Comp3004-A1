@@ -8,7 +8,14 @@ public class Card {
 	public Card(String suit,String rank)
 	{
 		this.suit = suit;
+		if(rank.equals("T"))
+		{
+			this.rank = "10";
+		}
+		else
+		{
 		this.rank = rank;
+		}
 	}
 	
 	public String getSuit()
@@ -23,11 +30,11 @@ public class Card {
 	
 	public int getValue()
 	{
-		if(this.rank == "A")
+		if(this.rank.equals("A"))
 		{
 			return 11;
 		}
-		else if(this.rank == "J" ||this.rank == "Q" ||this.rank == "K")
+		else if(this.rank.equals("J") ||this.rank.equals("Q") ||this.rank.equals("K"))
 		{
 			return 10;
 		}

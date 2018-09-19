@@ -119,13 +119,18 @@ public class BlackJackTest extends TestCase{
 	public void testplayMatch()
 	{
 		BlackJack bj = new BlackJack();
+		BlackJack bj2 = new BlackJack();
+		BlackJack bj3 = new BlackJack();
+		BlackJack bj4 = new BlackJack();
+		BlackJack bj5 = new BlackJack();
+		BlackJack bj6 = new BlackJack();
 		
 		assertEquals(true,bj.playMatch("gameTest1.txt"));//instant win off blackjack for player
-		assertEquals(false,bj.playMatch("gameTest2.txt"));//tie loss off blackjack for both
-		assertEquals(true,bj.playMatch("gameTest3.txt"));//win from dealer busting
-		assertEquals(true,bj.playMatch("gameTest4.txt"));//win from player higher hand
-		assertEquals(false,bj.playMatch("gameTest5.txt"));//loss from player busting
-		assertEquals(false,bj.playMatch("gameTest6.txt"));//loss from dealer higher hand
+		assertEquals(false,bj2.playMatch("gameTest2.txt"));//tie loss off blackjack for both
+		assertEquals(true,bj3.playMatch("gameTest3.txt"));//win from dealer busting
+		assertEquals(true,bj4.playMatch("gameTest4.txt"));//win from player higher hand
+		assertEquals(false,bj5.playMatch("gameTest5.txt"));//loss from player busting
+		assertEquals(false,bj6.playMatch("gameTest6.txt"));//loss from dealer higher hand
 	}
 	
 	public void testsplit()

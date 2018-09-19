@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class BlackJack {
@@ -25,6 +26,128 @@ public class BlackJack {
 		isFileInput = false;
 		fileContents = "";
 		playerChoice = "";
+	}
+	
+	//file
+	public boolean playMatch(String fName)
+	{
+		
+	getFileInput(fName);
+	fileContents = fileContents.replaceAll("10", "T");
+	ArrayList<String> commands = new ArrayList<String>();
+	
+	for(String temp:fileContents.split(" "))
+	{
+		commands.add(temp);
+	}
+	
+		
+	player1.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+	commands.remove(0);
+	player1.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+	commands.remove(0);
+	
+	
+	dealer.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+	commands.remove(0);
+	dealer.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+	commands.remove(0);
+	
+	view.displayPlayerHand(player1);
+	view.displayDealerHand(dealer,false);
+	
+	//checks if either player or dealer hands are 21 in which case the game ends at this point
+	if(checkFor21() && !checkFor21(dealer))
+	{
+		view.gameWin();
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
+		return true;
+	}
+	else if(checkFor21(dealer))
+	{
+		view.gameOver();
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
+		return false;
+	}
+	
+	//game continues here, player is given a choice to stand or hit
+	else
+	{
+	view.askForPlayerChoice();
+	playerChoice = Character.toString(commands.get(0).charAt(0));
+	commands.remove(0);
+	while (!playerChoice.equals("S"))
+	{
+		
+	if(playerChoice.equals("H"))
+	{
+		view.playerHit();
+		player1.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+		commands.remove(0);
+		if(checkForBust(player1))
+		{
+			view.gameOver();
+			view.displayPlayerHand(player1);
+			view.displayDealerHand(dealer,true);
+			return false;
+		}
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,false);
+		
+		view.askForPlayerChoice();
+		playerChoice = Character.toString(commands.get(0).charAt(0));
+		commands.remove(0);
+	}
+	else if(playerChoice.equals("D"))
+	{
+		//Todo: split method
+	}
+	else if(playerChoice.equals("S"))
+	{
+		break;
+	}
+	else
+	{
+		view.wrongInputMessage();
+		break;
+	}
+	}
+	view.playerStand();
+	
+	//player controlled part of the game has ended
+	while(dealer.dealerDecision())
+	{
+		view.dealerHit();
+		dealer.drawCard(new Card(Character.toString(commands.get(0).charAt(0)),Character.toString(commands.get(0).charAt(1))));
+		commands.remove(0);
+		
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer,true);
+		if(checkForBust(dealer))
+		{
+			view.gameWin();
+			return true;
+		}
+	}
+	view.dealerStand();
+	//end of dealer controlled part of the game
+	
+	view.displayPlayerHand(player1);
+	view.displayDealerHand(dealer,true);
+	//final comparison of hands to determine winner
+	if(compareHands())
+	{
+		view.gameWin();
+		return true;
+	}
+	else
+	{
+		view.gameOver();
+		return false;
+	}
+	}	
 	}
 	
 	//console
@@ -128,6 +251,7 @@ public class BlackJack {
 	}
 	}	
 	}
+	
 	
 	public String getFileContents()
 	{
@@ -233,7 +357,7 @@ public class BlackJack {
 	
 	public static void main(String[] args) {
 		BlackJack bj = new BlackJack();
-		boolean result = bj.playMatch();
+		boolean result = bj.playMatch("gameTest6.txt");
 	}
 	
 }
