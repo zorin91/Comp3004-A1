@@ -15,6 +15,12 @@ public class Card {
 	{
 		return this.suit;
 	}
+	
+	public String getRank()
+	{
+		return this.rank;
+	}
+	
 	public int getValue()
 	{
 		if(this.rank == "A")

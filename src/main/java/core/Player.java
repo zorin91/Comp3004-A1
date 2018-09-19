@@ -25,6 +25,11 @@ public class Player {
 		return card.toString();
 	}
 	
+	public Card getCardInHandAt(int i)
+	{
+		return hand.get(i);
+	}
+	
 	public int getHandSize()
 	{
 		return this.handSize;
