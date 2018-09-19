@@ -45,10 +45,35 @@ public class BlackJack {
 		return true;
 	}
 	
+	
+	view.askForPlayerChoice();
 	playerChoice = getPlayerChoice();
+	while (!playerChoice.equals("S"))
+	{
+		
 	if(playerChoice.equals("H"))
 	{
 		player1.drawCard(deck.pop());
+		if(checkForBust(player1))
+		{
+			view.GameOver();
+			return false;
+		}
+		view.displayPlayerHand(player1);
+		view.displayDealerHand(dealer);
+		
+		playerChoice = getPlayerChoice();
+	}
+	else if(playerChoice.equals("D"))
+	{
+		//Todo: split method
+	}
+	else
+	{
+		view.wrongInputMessage();
+		break;
+	}
+	
 	}
 	
 	
