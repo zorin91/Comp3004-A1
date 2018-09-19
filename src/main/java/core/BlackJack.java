@@ -74,7 +74,30 @@ public class BlackJack {
 			return false;
 		}
 	}
+	
+	public boolean checkForBust(Player p)
+	{
+		if(p.getHandValue() > 21)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
+	public boolean checkForBust(Dealer d)
+	{
+		if(d.getHandValue() > 21)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 	public boolean compareHands()
 	{
@@ -87,6 +110,8 @@ public class BlackJack {
 			return false;
 		}
 	}
+	
+	
 	
 	public void getFileInput(String fName)
 	{
