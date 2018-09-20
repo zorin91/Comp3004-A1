@@ -356,8 +356,25 @@ public class BlackJack {
 	}
 	
 	public static void main(String[] args) {
+	
 		BlackJack bj = new BlackJack();
-		boolean result = bj.playMatch("gameTest6.txt");
+		System.out.println("Welcome to BlackJack, press 'c' for console input or 'f' for file input.");
+		Scanner k = new Scanner(System.in);
+		String fileOrConsole = k.nextLine();
+		if(fileOrConsole.equals("c"))
+		{
+			bj.playMatch();
+		}
+		else if(fileOrConsole.equals("f"))
+		{
+			System.out.println("Please input the name of the file you would like to use");
+			bj.playMatch(k.nextLine());
+		}
+			
+		else
+		{
+			System.out.println("Invalid input");
+		}
 	}
 	
 }
