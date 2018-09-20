@@ -139,11 +139,15 @@ public class BlackJack {
 	//final comparison of hands to determine winner
 	if(compareHands())
 	{
+		System.out.println("Player hand value: " + player1.getHandValue());
+		System.out.println("Dealer hand value: " + dealer.getHandValue());
 		view.gameWin();
 		return true;
 	}
 	else
 	{
+		System.out.println("Player hand value: " + player1.getHandValue());
+		System.out.println("Dealer hand value: " + dealer.getHandValue());
 		view.gameOver();
 		return false;
 	}
@@ -241,11 +245,15 @@ public class BlackJack {
 	//final comparison of hands to determine winner
 	if(compareHands())
 	{
+		System.out.println("Player hand value: " + player1.getHandValue());
+		System.out.println("Dealer hand value: " + dealer.getHandValue());
 		view.gameWin();
 		return true;
 	}
 	else
 	{
+		System.out.println("Player hand value: " + player1.getHandValue());
+		System.out.println("Dealer hand value: " + dealer.getHandValue());
 		view.gameOver();
 		return false;
 	}
